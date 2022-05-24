@@ -1,0 +1,134 @@
+<p-toast></p-toast>
+<p-toolbar *ngIf="isDashboard">
+        <div  class="p-toolbar-group-left">
+            <button (click)="onAdd()" pButton pRipple type="button" label="Student" icon="pi pi-plus" class="p-button-raised"></button>
+        </div>
+
+        <h2></h2>
+        <div class="p-toolbar-group-right">
+            <button (click)="onPending()" pButton pRipple type="button" label="Pending Fee" icon="pi pi-info-circle" class="p-button-raised p-button-secondary"></button>
+        </div>
+</p-toolbar>
+<p-toolbar *ngIf="isNewStudent">
+        <div  class="p-toolbar-group-left">
+            <p-button (click)="onCancel()" label="Home" icon="pi pi-home" styleClass="p-button-raised p-button-info"></p-button>
+        </div>
+    </p-toolbar>      <br/>
+
+
+<p-table *ngIf="isDashboard" #dt [value]="students" [(selection)]="selectedStudent" dataKey="id"
+        styleClass="p-datatable-students" [rowHover]="true" 
+        [rows]="5"  [showCurrentPageReport]="true"   
+        [loading]="loading"  responsiveLayout="scroll" [paginator]="true" 
+        currentPageReportTemplate="Showing {first} to {last} entries"
+        [filterDelay]="0" [globalFilterFields]="['name']">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            Students
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" 
+                    (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
+                    placeholder="Search" /></span>
+        </div>
+    </ng-template>
+        <ng-template pTemplate="header">
+        <tr>
+            <th>Name</th>
+            <th>Father</th>
+            <th>Contact</th>
+            <th>Fees</th>
+<!--            <th>Profile</th>-->
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-student>
+        <tr>
+            <td>
+                <button (click)="studentClicked(student)" pButton pRipple type="button" label="{{student.name}}" class="p-button-text"></button>
+            </td>
+            <td>{{student.father}}</td>
+            <td>{{student.mobile1}}</td>
+<!--            <td>{{student.photo}}</td>-->
+            <button (click)="onFees(student)" pButton pRipple type="button" icon="pi pi-money-bill" class="p-button-rounded p-button-warning p-button-text"></button>
+        </tr>
+    </ng-template>
+</p-table>
+
+<form [formGroup]="form" *ngIf="isNewStudent">
+    <div class="grid p-fluid">
+        <div class="field col-12 md:col-4">
+            <label for="name">Student Name</label>
+            <input type="text" pInputText class="p-inputtext-sm"  formControlName="name" placeholder="Name" optionLabel="name">
+            <small *ngIf="studentForm.name.invalid && isStudentSaved" class="p-error">
+                <span *ngIf="studentForm.name.errors?.required">Name is mandatory</span>
+            </small>
+
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="dob">Date of Birth</label>
+            <p-calendar formControlName="dob" styleClass="p-datepicker-touch-p" inputId="dob"></p-calendar>
+            <small *ngIf="studentForm.dob.invalid && isStudentSaved" class="p-error">
+                <span *ngIf="studentForm.dob.errors?.required">Date of Birth is mandatory</span>
+            </small>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="language">Mother Tongue</label>
+            <input type="text" pInputText class="p-inputtext-sm"  formControlName="language" placeholder="Mother Tongue" optionLabel="language">
+        </div>
+    </div>        
+    <div class="grid p-fluid">
+        <div class="field col-12 md:col-4">
+            <label for="father">Father's Name</label>
+            <input type="text" pInputText class="p-inputtext-sm"  formControlName="father"  placeholder="Father">
+            <small *ngIf="studentForm.father.invalid && isStudentSaved" class="p-error">
+                <span *ngIf="studentForm.father.errors?.required">Father is mandatory</span>
+            </small>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="job1">Father's Occupation</label>
+            <input type="text" pInputText class="p-inputtext-sm" formControlName="job1"  placeholder="Father Occupation">
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="mobile1">Mobile</label>
+            <input type="text" pInputText class="p-inputtext-sm" formControlName="mobile1"  placeholder="Father's Contact">
+            <small *ngIf="studentForm.mobile1.invalid && isStudentSaved" class="p-error">
+                <span *ngIf="studentForm.mobile1.errors?.required">Contact is mandatory</span>
+            </small>
+            </div>
+    </div>
+    <div class="grid p-fluid">
+        <div class="field col-12 md:col-4">
+            <label for="mother">Mother's Name</label>
+            <input type="text" pInputText class="p-inputtext-sm" formControlName="mother"  placeholder="Mother">
+            <small *ngIf="studentForm.mother.invalid && isStudentSaved" class="p-error">
+                <span *ngIf="studentForm.mother.errors?.required">Mother is mandatory</span>
+            </small>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="job2">Mother's Occupation</label>
+            <input type="text" pInputText class="p-inputtext-sm" formControlName="job2"  placeholder="Mother's Occupation">
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="mobile2">Mobile</label>
+            <input type="text" pInputText class="p-inputtext-sm" formControlName="mobile2"  placeholder="Mother's Contact">
+            </div>
+    </div>
+    <div class="grid p-fluid">
+        <div class="field col-6 md:col-4">
+            <label for="address1">Home Address</label>
+            <textarea formControlName="address1" rows="4" cols="30" pInputTextarea></textarea>
+        </div>
+        <div class="field col-6 md:col-4">
+            <label for="address2">Work Address</label>
+            <textarea formControlName="address2" rows="4" cols="30" pInputTextarea></textarea>
+        </div>
+    </div>
+    <p-toolbar>
+        <div class="p-toolbar-group-left">
+            <button (click)="onSave()" pButton pRipple type="button" label="Save" icon="pi pi-save" class="p-button-raised"></button>
+        </div>
+    </p-toolbar>      <br/>
+
+</form>
+
+

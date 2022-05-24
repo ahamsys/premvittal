@@ -1,0 +1,186 @@
+
+<p-toast></p-toast>
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+        <p-button class="mr-2" (click)="onHome()" label="Home" icon="pi pi-home" styleClass="p-button-raised p-button-info"></p-button>
+        <p-button class="mr-2" (click)="onRemark()" label="Remarks" icon="pi pi-plus" class="p-button-raised p-button-secondary" ></p-button>
+        <i class="p-toolbar-separator" style="vertical-align: middle"></i>
+        <button (click)="onReportCard()" pButton pRipple type="button" label="Report Card" icon="pi pi-book" class="p-button-raised p-button-secondary"></button>
+    </div>
+
+    <div class="p-toolbar-group-right">
+        <p-button (click)="onModifyCancel()" icon="pi pi-times" styleClass="p-button-danger"></p-button>
+    </div>
+</p-toolbar>  
+
+<p-card *ngIf="isViewStudent && viewStudent">
+        <div class="grid">
+            <div class="col">
+                <h1>{{viewStudent.name}}</h1>
+            </div>
+            <div class="col">
+                <h2>{{viewStudent.dob | date:'mediumDate'}}  </h2>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col">
+                <p>Father:</p>
+                <h3>{{viewStudent.father}}</h3>
+                <h3>{{viewStudent.mobile1}}</h3>
+            </div>
+            <div class="col">
+                <p>Occupation:</p>
+                <h3>{{viewStudent.job1 }}  </h3>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col">
+                <p>Mother:</p>
+                <h3>{{viewStudent.mother}}</h3>
+                <h3>{{viewStudent.mobile2}}</h3>
+            </div>
+            <div class="col">
+                <p>Occupation:</p>
+                <h3>{{viewStudent.job2 }}  </h3>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col">
+                <p>Address 1:</p>
+                <h3>{{viewStudent.address1}}</h3>
+            </div>
+            <div class="col">
+                <p>Address 2:</p>
+                <h3>{{viewStudent.address2}}</h3>
+            </div>
+        </div>
+            <div class="p-toolbar-group-left">
+                <button (click)="onEditStudent()" pButton pRipple type="button" label="Modify" icon="pi pi-pencil" class="p-button-raised p-button-success"></button>
+            </div>
+</p-card>    
+
+<p-card *ngIf="isEditStudent">
+<form [formGroup]="form" >
+    <div class="grid p-fluid">
+        <div class="field col-12 md:col-4">
+            <label for="name">Student Name</label>
+            <input type="text" pInputText class="p-inputtext-sm"  formControlName="name" placeholder="Name" optionLabel="name">
+            <small *ngIf="studentForm.name.invalid && isStudentSaved" class="p-error">
+                <span *ngIf="studentForm.name.errors?.required">Name is mandatory</span>
+            </small>
+
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="dob">Date of Birth</label>
+            <p-calendar formControlName="dob" styleClass="p-datepicker-touch-p" inputId="dob"></p-calendar>
+            <small *ngIf="studentForm.dob.invalid && isStudentSaved" class="p-error">
+                <span *ngIf="studentForm.dob.errors?.required">Date of Birth is mandatory</span>
+            </small>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="language">Mother Tongue</label>
+            <input type="text" pInputText class="p-inputtext-sm"  formControlName="language" placeholder="Mother Tongue" optionLabel="language">
+        </div>
+    </div>        
+    <div class="grid p-fluid">
+        <div class="field col-12 md:col-4">
+            <label for="father">Father's Name</label>
+            <input type="text" pInputText class="p-inputtext-sm"  formControlName="father"  placeholder="Father">
+            <small *ngIf="studentForm.father.invalid && isStudentSaved" class="p-error">
+                <span *ngIf="studentForm.father.errors?.required">Father is mandatory</span>
+            </small>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="job1">Father's Occupation</label>
+            <input type="text" pInputText class="p-inputtext-sm" formControlName="job1"  placeholder="Father Occupation">
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="mobile1">Mobile</label>
+            <input type="text" pInputText class="p-inputtext-sm" formControlName="mobile1"  placeholder="Father's Contact">
+            <small *ngIf="studentForm.mobile1.invalid && isStudentSaved" class="p-error">
+                <span *ngIf="studentForm.mobile1.errors?.required">Contact is mandatory</span>
+            </small>
+            </div>
+    </div>
+    <div class="grid p-fluid">
+        <div class="field col-12 md:col-4">
+            <label for="mother">Mother's Name</label>
+            <input type="text" pInputText class="p-inputtext-sm" formControlName="mother"  placeholder="Mother">
+            <small *ngIf="studentForm.mother.invalid && isStudentSaved" class="p-error">
+                <span *ngIf="studentForm.mother.errors?.required">Mother is mandatory</span>
+            </small>
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="job2">Mother's Occupation</label>
+            <input type="text" pInputText class="p-inputtext-sm" formControlName="job2"  placeholder="Mother's Occupation">
+        </div>
+        <div class="field col-12 md:col-4">
+            <label for="mobile2">Mobile</label>
+            <input type="text" pInputText class="p-inputtext-sm" formControlName="mobile2"  placeholder="Mother's Contact">
+            </div>
+    </div>
+    <div class="grid p-fluid">
+        <div class="field col-6 md:col-4">
+            <label for="address1">Home Address</label>
+            <textarea formControlName="address1" rows="4" cols="30" pInputTextarea></textarea>
+        </div>
+        <div class="field col-6 md:col-4">
+            <label for="address2">Work Address</label>
+            <textarea formControlName="address2" rows="4" cols="30" pInputTextarea></textarea>
+        </div>
+    </div>
+    <p-toolbar>
+        <div class="p-toolbar-group-left">
+            <button (click)="onSave()" pButton pRipple type="button" label="Save" icon="pi pi-save" class="p-button-raised"></button>
+        </div>
+    </p-toolbar>      <br/>
+
+</form>
+</p-card>
+
+<p-card *ngIf="isRemarkStudent">
+    <form [formGroup]="form2" >
+        <div class="grid p-fluid">
+            <div class="field col-12">
+                <label for="remark">Remark</label>
+                <textarea formControlName="remark" rows="4" cols="30" pInputTextarea></textarea>
+                <small *ngIf="remarkForm.remark.invalid && isRemarkSaved" class="p-error">
+                    <span *ngIf="remarkForm.remark.errors?.required">Remark is mandatory</span>
+                </small>
+            </div>
+            <div class="field col-12">
+                <label for="date">Date</label>
+                <p-calendar formControlName="date" styleClass="p-datepicker-touch-p" inputId="date"></p-calendar>
+                <small *ngIf="remarkForm.date.invalid && isRemarkSaved" class="p-error">
+                    <span *ngIf="remarkForm.date.errors?.required">Date is mandatory</span>
+                </small>
+            </div>
+        </div>        
+        <p-toolbar>
+            <div class="p-toolbar-group-left">
+                <button (click)="onRemarkSave()" pButton pRipple type="button" label="Save" icon="pi pi-save" class="p-button-raised"></button>
+            </div>
+        </p-toolbar>      <br/>    
+    </form>
+</p-card>
+    
+<div class="card">
+<p-table [value]="remarks" responsiveLayout="scroll">
+    <ng-template pTemplate="caption">
+        <div class="table-header">
+            Remarks History 
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>            
+            <th pSortableColumn="remark">Remark<p-sortIcon field="remark"></p-sortIcon></th>         
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-remark>
+        <tr>
+            <td>{{remark.date  | date:'mediumDate' }}</td>
+            <td>{{remark.remark}}</td>
+        </tr>
+    </ng-template>
+</p-table>
