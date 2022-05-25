@@ -1,14 +1,14 @@
 
 <p-toast></p-toast>
 <p-toolbar>
-    <div class="p-toolbar-group-left">
-        <p-button class="mr-2" (click)="onHome()" label="Home" icon="pi pi-home" styleClass="p-button-raised p-button-info"></p-button>
-        <p-button class="mr-2" (click)="onRemark()" label="Remarks" icon="pi pi-plus" class="p-button-raised p-button-secondary" ></p-button>
+    <p-button class="mr-2" (click)="onHome()" label="Home" icon="pi pi-home" styleClass="p-button-raised p-button-info"></p-button>
+    <div *ngIf="isViewStudent" class="p-toolbar-group-left">
+        <p-button class="mr-2" (click)="onRemark()" label="Remarks1" icon="pi pi-plus" class="p-button-raised p-button-secondary" ></p-button>
         <i class="p-toolbar-separator" style="vertical-align: middle"></i>
-        <button (click)="onReportCard()" pButton pRipple type="button" label="Report Card" icon="pi pi-book" class="p-button-raised p-button-secondary"></button>
+        <button  (click)="onReportCard()" pButton pRipple type="button" label="Report Card" icon="pi pi-book" class="p-button-raised p-button-secondary"></button>
     </div>
 
-    <div class="p-toolbar-group-right">
+    <div *ngIf="isEditStudent || isRemarkStudent" class="p-toolbar-group-right">
         <p-button (click)="onModifyCancel()" icon="pi pi-times" styleClass="p-button-danger"></p-button>
     </div>
 </p-toolbar>  
