@@ -20,7 +20,7 @@
         styleClass="p-datatable-students" [rowHover]="true" 
         [rows]="5"  [showCurrentPageReport]="true"   
         [loading]="loading"  responsiveLayout="scroll" [paginator]="true" 
-        currentPageReportTemplate="Showing {first} to {last} entries"
+        currentPageReportTemplate="{first} to {last} entries"
         [filterDelay]="0" [globalFilterFields]="['name']">
     <ng-template pTemplate="caption">
         <div class="table-header">

@@ -4,9 +4,11 @@
 
 export const environment = {
   production: false,
+  apiURLGlobal: "http://localhost:3001/api-prem/vi/",
   apiURL:"http://localhost:3001/api-prem/vi/students/",
   apiFeeURL:"http://localhost:3001/api-prem/vi/fees/",
   apiRemarksURL:"http://localhost:3001/api-prem/vi/remarks/",
+  apiUserURL:"http://localhost:3001/api-prem/vi/user/",
 
 
 };

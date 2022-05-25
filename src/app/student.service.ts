@@ -5,6 +5,7 @@ import { Student } from './models/student';
 import { Fees } from './models/fees';
 import { PendingFees } from './models/pendingfees';
 import { Remarks } from './models/remarks';
+import { User } from './models/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -14,6 +15,7 @@ export class StudentService {
   apiURL = environment.apiURL ;
   apiFeeURL = environment.apiFeeURL;
   apiRemarksURL = environment.apiRemarksURL;
+  apiUserURL = environment.apiUserURL;
 
   constructor(private http: HttpClient) { }
 
@@ -56,5 +58,13 @@ export class StudentService {
   
   getRemarks(studentID : String): Observable<Remarks[]> {
     return this.http.get<Remarks[]>(`${this.apiRemarksURL}/${studentID}`);
+  }
+
+  registerUser(user: User): Observable<User> {
+    return this.http.post<User>(`${this.apiUserURL}/register`, user);
+  }
+
+  validateUser(user: User): Observable<any> {
+    return this.http.post<any>(`${this.apiUserURL}/login`, user);
   }
 }

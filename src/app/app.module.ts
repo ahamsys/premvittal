@@ -24,6 +24,7 @@ import { FeeComponent } from './fee/fee.component';
 import { LoginComponent } from './login/login.component';
 import { PendingFeeComponent } from './pending-fee/pending-fee.component';
 import { ReportCardComponent } from './report-card/report-card.component';
+import { JwtInterceptor } from './services/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,9 @@ import { ReportCardComponent } from './report-card/report-card.component';
     CalendarModule,
     ToastModule
   ],
-  providers: [StudentService, MessageService],
+  providers: [StudentService, MessageService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
