@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-thankyou',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./thankyou.component.scss']
 })
 export class ThankyouComponent implements OnInit {
-
-  constructor() { }
+  buttonText1 : String = "You can Close the Browser Safely"
+  buttonText2 : String = "OR click the Sign In"
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
   }
 
+  signIn() {
+    this.route.navigateByUrl('/')
+  }
 }

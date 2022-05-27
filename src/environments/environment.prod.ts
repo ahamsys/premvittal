@@ -5,6 +5,7 @@ export const environment = {
   apiFeeURL:"https://premdb-backend.herokuapp.com/api-prem/vi/fees/",
   apiRemarksURL:"https://premdb-backend.herokuapp.com/api-prem/vi/remarks/",
   apiUserURL:"https://premdb-backend.herokuapp.com/api-prem/vi/user/",
+  apiPasswordURL:"https://premdb-backend.herokuapp.com/api-prem/vi/password/",
 
 };
 

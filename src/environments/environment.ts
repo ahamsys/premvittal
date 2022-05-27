@@ -9,8 +9,7 @@ export const environment = {
   apiFeeURL:"http://localhost:3001/api-prem/vi/fees/",
   apiRemarksURL:"http://localhost:3001/api-prem/vi/remarks/",
   apiUserURL:"http://localhost:3001/api-prem/vi/user/",
-
-
+  apiPasswordURL:"http://localhost:3001/api-prem/vi/password/",
 };
 
 /*

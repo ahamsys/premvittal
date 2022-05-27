@@ -60,11 +60,4 @@ export class StudentService {
     return this.http.get<Remarks[]>(`${this.apiRemarksURL}/${studentID}`);
   }
 
-  registerUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.apiUserURL}/register`, user);
-  }
-
-  validateUser(user: User): Observable<any> {
-    return this.http.post<any>(`${this.apiUserURL}/login`, user);
-  }
 }

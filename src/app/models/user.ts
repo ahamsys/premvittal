@@ -5,4 +5,5 @@ export class User {
     password?       : string;
     mobile?         : number;
     email?          : string;
+    newuser?        : boolean;
   }

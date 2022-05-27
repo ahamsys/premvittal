@@ -15,6 +15,8 @@ import {CalendarModule} from 'primeng/calendar';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ToastModule} from 'primeng/toast';
 import {ToolbarModule} from 'primeng/toolbar';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {PasswordModule} from 'primeng/password';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StudentService } from './student.service';
 import { MessageService } from 'primeng/api';
@@ -25,6 +27,8 @@ import { LoginComponent } from './login/login.component';
 import { PendingFeeComponent } from './pending-fee/pending-fee.component';
 import { ReportCardComponent } from './report-card/report-card.component';
 import { JwtInterceptor } from './services/jwt.interceptor';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,9 @@ import { JwtInterceptor } from './services/jwt.interceptor';
     FeeComponent,
     LoginComponent,
     PendingFeeComponent,
-    ReportCardComponent
+    ReportCardComponent,
+    ChangePasswordComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,BrowserAnimationsModule,
@@ -49,10 +55,12 @@ import { JwtInterceptor } from './services/jwt.interceptor';
     ButtonModule,
     ToolbarModule,
     CheckboxModule,
+    PasswordModule,
 //    OrderListModule,
     TableModule,
     CalendarModule,
-    ToastModule
+    ToastModule,
+    ProgressSpinnerModule
   ],
   providers: [StudentService, MessageService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],

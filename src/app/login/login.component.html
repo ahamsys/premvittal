@@ -2,38 +2,51 @@
 <p-toast></p-toast>
 <div class="login">
 <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+    <div *ngIf="isSignin" class="text-center ">
+    <p-progressSpinner ></p-progressSpinner>
+    </div>
     <div class="text-center mb-5">
         <img src="assets/images/giraffe.png" alt="Image" height="50" class="mb-3">
         <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
 <!--        <span class="text-600 font-medium line-height-3">Don't have an account?</span>
         <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</a> -->
-        <button pButton pRipple type="button" label="Don't have an account?" class="p-button-text p-button-plain" disabled="true"></button>
-        <button pButton pRipple type="button" label="Register" class="p-button-text text-blue-500" (click)="registerUser()"></button>
+        <button pButton pRipple type="button" class="p-button-text p-button-plain" disabled="true">{{buttonText2}}</button>
+        <button pButton pRipple type="button" class="p-button-text text-blue-500" (click)="registerUser()">{{buttonText}}</button>
     </div>
 
     <form [formGroup]="form" >
     <div>
-        <label for="user" class="block text-900 font-medium mb-2">User Name</label>
-        <input id="user" type="text" pInputText class="w-full mb-3" formControlName="name">
-
-        <label for="password" class="block text-900 font-medium mb-2">Password</label>
-        <input id="password" type="password" pInputText class="w-full mb-3" formControlName="password">
+        <small *ngIf="loginForm.name.invalid && isSignin" class="p-error">
+            <span *ngIf="loginForm.name.errors?.required">User field is Mandatory</span> </small>
+    
+            <label for="user" class="block text-900 font-medium mb-2"></label>
+        <input id="user" type="text" pInputText class="w-full mb-3" formControlName="name" placeholder="User Id/Name">
+        <small *ngIf="loginForm.password.invalid && isSignin" class="p-error">
+            <span *ngIf="loginForm.password.errors?.required">Password is Mandatory</span> </small>
+            <label for="password" class="block text-900 font-medium mb-2"></label>
+        <input id="password" type="password" pInputText class="w-full mb-3" formControlName="password" placeholder="Password">
 
         <div *ngIf="registeruser">
-        <label for="email" class="block text-900 font-medium mb-2">Email</label>
-        <input id="email" type="text" pInputText class="w-full mb-3" formControlName="email">
-        
-        <label for="mobile" class="block text-900 font-medium mb-2">Mobile</label>
-        <input id="mobile" type="mobile" pInputText class="w-full mb-3" formControlName="mobile">
+            <small *ngIf="loginForm.email.invalid && isSignin" class="p-error">
+                <span *ngIf="loginForm.email.errors?.required">Email id is Mandatory</span>
+                <span *ngIf="loginForm.email.errors?.email">Email id is Invalid</span>
+                </small>
+                <label for="email" class="block text-900 font-medium mb-2"></label>
+            <input id="email" type="text" pInputText class="w-full mb-3" formControlName="email" placeholder="Email Id">
+    
+            <small *ngIf="loginForm.mobile.invalid && isSignin" class="p-error">
+                <span *ngIf="loginForm.mobile.errors?.required">Mobile number is Invalid</span>
+                </small>
+                <label for="mobile" class="block text-900 font-medium mb-2"></label>
+            <input id="mobile" type="mobile" pInputText class="w-full mb-3" formControlName="mobile" placeholder="Mobile Number">
         </div>
      
-        <div class="flex align-items-center justify-content-between mb-6">
+        <div *ngIf="!registeruser" class="flex align-items-center justify-content-between mb-6">
             <div class="flex align-items-center">
                 <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
                 <label for="rememberme1" class="text-900">Remember me</label>
             </div>
-<!--            <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
--->             <button pButton pRipple type="button" label="Forgot Password?" class="p-button-text text-blue-500" (click)="registerUser()"></button>
+             <button pButton pRipple type="button" label="Forgot Password?" class="p-button-text text-blue-500" (click)="changePassword()"></button>
        </div>
 
         <div *ngIf="!registeruser">
@@ -42,6 +55,7 @@
         <div *ngIf="registeruser">
             <button pButton pRipple label="Register" icon="pi pi-plus" class="w-full" (click)="signIn()"></button>
         </div>
+
     </div>
     </form>
 </div>

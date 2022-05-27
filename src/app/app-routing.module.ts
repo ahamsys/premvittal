@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditStudentComponent } from './edit-student/edit-student.component';
 import { FeeComponent } from './fee/fee.component';
@@ -37,12 +39,20 @@ const routes: Routes = [
   },
   {
     path: 'thankyou',
-    canActivate: [AuthGuardService],
     component: ThankyouComponent
   },
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'changepassword',
+    component: ChangePasswordComponent
+  },
+  {
+    path: 'admin',
+    canActivate: [AuthGuardService],
+    component: AdminComponent
   }
 
 ];
