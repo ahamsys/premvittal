@@ -45,7 +45,6 @@ export class ChangePasswordComponent implements OnInit {
 
   submit() {
     this.isSubmitted=true;
-//    this.route.navigateByUrl('thankyou')
 
     if (this.form.invalid) { 
       console.log("Invalid Form data"); return; }

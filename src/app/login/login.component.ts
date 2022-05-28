@@ -86,7 +86,6 @@ export class LoginComponent implements OnInit {
         this.registeruser =false;
       
       this.setValues()
-      this.route.navigateByUrl('thankyou');     
       this.localStorage.removeToken();
   }
 
