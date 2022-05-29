@@ -21,7 +21,8 @@ export class ChangePasswordComponent implements OnInit {
   userid     : String;
   otp        : String;
   resetPassword : boolean=false;
-  value3 : String;  
+  isOverlay  : boolean = false;
+
   constructor(private fb: FormBuilder,
     private userService: UserService,
     private messageService : MessageService,
@@ -61,7 +62,7 @@ export class ChangePasswordComponent implements OnInit {
 //      alert("OTP Sent, Check your registered Email!");
       this.storeToken(response)
       this.resetPassword=true;
-      this.passwordForm.otp.setValue(this.otp)
+//      this.passwordForm.otp.setValue(this.otp)
 
    //      this.route.navigateByUrl('thankyou')
       },
@@ -75,6 +76,7 @@ export class ChangePasswordComponent implements OnInit {
 
 
   submitPassword() {
+    this.isOverlay=true;
     this.isSubmitted2=true;
 
     if (this.form2.invalid) { 

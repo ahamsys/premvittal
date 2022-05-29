@@ -14,7 +14,7 @@ import { LocalstorageService } from '../localstorage.service';
 export class AdminComponent implements OnInit {
   users : User[] = [];
   loading : boolean = true;
-  selectedUser: User[];
+  selectedUser: User;
   viewStudent: boolean = false;
 
   constructor(private userService : UserService,
@@ -35,10 +35,14 @@ export class AdminComponent implements OnInit {
     })
   }
 
-  studentClicked(user: User) {
+  userClicked(user: User) {
+    this.selectedUser=user;
     this.viewStudent = true;
   }
 
+  onCloseViewUser() {
+    this.viewStudent=false;
+  }
   onCancel() {
     this.route.navigateByUrl('/')
   }

@@ -35,7 +35,7 @@
     <ng-template pTemplate="body" let-user>
         <tr>
             <td>
-                <button (click)="studentClicked(user)" pButton pRipple type="button" label="{{user.name}}" class="p-button-text"></button>
+                <button (click)="userClicked(user)" pButton pRipple type="button" label="{{user.name}}" class="p-button-text"></button>
             </td>
             <td>{{user.email}}</td>
             <td>
@@ -50,7 +50,34 @@
         </tr>
     </ng-template>
 </p-table>
+<div *ngIf="viewStudent" >
+    <p-toolbar>
+        <p>User Detail</p>
+    <div  class="p-toolbar-group-right">
+        <button (click)="onCloseViewUser()" pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined"></button>
+    </div>
+</p-toolbar>
+<p-card>
+    <div class="grid">
+        <div class="col">
+            <p>Name </p>
+            <h4>{{selectedUser.name}}</h4>
+        </div>
+        <div class="col">
+            <p>Mobile </p>
+            <h4>{{selectedUser.mobile}}  </h4>
+        </div>
+        <div class="col">
+            <p>Email</p>
+            <h4>{{selectedUser.email}}  </h4>
+        </div>
+    </div>
+</p-card>
+
+</div>
+
 <p-toolbar >
+    <h5>Exit</h5>
     <div  class="p-toolbar-group-right">
         <button (click)="onExit()" pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined"></button>
     </div>
