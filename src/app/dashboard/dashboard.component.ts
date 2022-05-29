@@ -5,6 +5,7 @@ import { Fees } from '../models/fees';
 import { StudentService } from '../student.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { LocalstorageService } from '../localstorage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,6 +30,7 @@ export class DashboardComponent implements OnInit {
   
   constructor(private studentService : StudentService,
               private messageService : MessageService,
+              private localStorage   : LocalstorageService,
               private route: Router,
               private fb: FormBuilder) { }
 
@@ -157,6 +159,12 @@ export class DashboardComponent implements OnInit {
     this.route.navigate(['editstudent', { id: this.viewStudent.id}] );
 //    this.route.navigateByUrl( 'editstudent' );
   }
+
+  onExit() {
+    this.localStorage.removeToken();
+    this.route.navigateByUrl('thankyou');
+  }
+
 
   get studentForm() {
     return this.form.controls;
