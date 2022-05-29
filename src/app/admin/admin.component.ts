@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { UserService } from '../user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { LocalstorageService } from '../localstorage.service';
 
 @Component({
   selector: 'app-admin',
@@ -19,7 +20,8 @@ export class AdminComponent implements OnInit {
   constructor(private userService : UserService,
     private messageService : MessageService,
     private route: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private localstorage : LocalstorageService) { }
 
   ngOnInit(): void {
     this.loading = false;
@@ -70,6 +72,10 @@ export class AdminComponent implements OnInit {
     })
   }
 
+  onExit() {
+    this.localstorage.removeToken();
+    this.route.navigateByUrl('thankyou');
+  }
   addMessage(state: boolean, log : string){
     this.messageService.add({
       severity: state ? 'success' : 'error', 

@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   buttonText : string = "Register";
   buttonText2: string = "Don't have an account?";
   newuser    : boolean = false;
+  isOverlay  : boolean = false;
 
   constructor(private fb: FormBuilder,
               private userService: UserService,
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit {
     }
 
   signIn() {
+    this.isOverlay=true;
     this.isSignin = true;
     if ( !this.registeruser){
       this.loginForm.email.setValue("dummy@gmail.com");
@@ -66,17 +68,20 @@ export class LoginComponent implements OnInit {
             alert("Successfully Registered")
             this.route.navigateByUrl('thankyou')},
             (error: HttpErrorResponse) => { 
+                this.isOverlay = false;
                 this.addMessage(false, 'Unable to Register User!');},
             () => console.log('Observer got a complete notification')
           );        
       }else {
         this.userService.validateUser(user).subscribe((response)=> {
           this.localStorage.setToken(response.key);
+//          this.sleep(5, user);
           this.routePanel(user);
         },
         (error) => { 
           console.log(error.error.message);
                 this.addMessage(false, error.error.message);
+                this.isOverlay = false;
         });
       }
 
@@ -121,6 +126,14 @@ export class LoginComponent implements OnInit {
     else{
       this.route.navigateByUrl('/');     
     }
+  }
+
+  sleep(secs, user){
+    setTimeout( () =>{           
+//      this.isOverlay = false;
+      this.routePanel(user);
+      console.log("Sleeping "+secs+" seconds")
+    },secs*1000)
   }
 
   get loginForm() {

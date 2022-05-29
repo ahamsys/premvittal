@@ -1,7 +1,7 @@
 
 <p-toast></p-toast>
 <div class="login">
-<div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+<div  class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
     <div *ngIf="isSignin" class="text-center ">
     <p-progressSpinner ></p-progressSpinner>
     </div>
@@ -10,11 +10,13 @@
         <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
 <!--        <span class="text-600 font-medium line-height-3">Don't have an account?</span>
         <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</a> -->
+        <div *ngIf="!isOverlay">
         <button pButton pRipple type="button" class="p-button-text p-button-plain" disabled="true">{{buttonText2}}</button>
         <button pButton pRipple type="button" class="p-button-text text-blue-500" (click)="registerUser()">{{buttonText}}</button>
+        </div>
     </div>
 
-    <form [formGroup]="form" >
+    <form *ngIf="!isOverlay" [formGroup]="form" >
     <div>
         <small *ngIf="loginForm.name.invalid && isSignin" class="p-error">
             <span *ngIf="loginForm.name.errors?.required">User field is Mandatory</span> </small>
@@ -55,8 +57,12 @@
         <div *ngIf="registeruser">
             <button pButton pRipple label="Register" icon="pi pi-plus" class="w-full" (click)="signIn()"></button>
         </div>
-
     </div>
     </form>
+    <div *ngIf="isOverlay" class="text-center ">
+        <h2>Authentication</h2>
+        <p-progressSpinner>
+        </p-progressSpinner>
+    </div>
 </div>
 </div>

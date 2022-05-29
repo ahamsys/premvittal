@@ -130,6 +130,10 @@ export class ChangePasswordComponent implements OnInit {
     }
 }
 
+  onExit() {
+        this.route.navigateByUrl('thankyou')
+  }
+
   get inputForm() {
     return this.form.controls;
   }
