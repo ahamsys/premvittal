@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Student } from './models/student';
 import { Fees } from './models/fees';
@@ -47,8 +47,13 @@ export class StudentService {
     return this.http.get<Fees[]>(`${this.apiFeeURL}/${studentid}`);
   }
 
-  getPendingFee(year: String): Observable<PendingFees[]> {
-    return this.http.get<PendingFees[]>(`${this.apiFeeURL}/pending/${year}`);
+  getPendingFee(data: any): Observable<PendingFees[]> {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("year", data.year)
+    queryParams = queryParams.append("month", data.month)
+
+    return this.http.get<PendingFees[]>(`${this.apiFeeURL}/pending/${data.year}`);
+    //, {params:queryParams});
   }
 
     //Insert new record for student

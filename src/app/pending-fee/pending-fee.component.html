@@ -1,10 +1,12 @@
 <p-toolbar>
+    <p-calendar [(ngModel)]="monthFee" view="month" dateFormat="mm/yy" [readonlyInput]="true" 
+                (onSelect)="monthSelect()" inputId="monthpicker" placeholder="Month"></p-calendar>
     <div class="p-toolbar-group-right">
         <button (click)="onCancel()" pButton pRipple type="button" label="Home" icon="pi pi-home" class="p-button-raised p-button-info"></button>
     </div>
 </p-toolbar>  
 <br/>
-<div class="card">
+<div class="card" *ngIf="monthFee">
 <p-table [value]="students" #dt responsiveLayout="scroll"
          [paginator]="true"         [rows]="5"  [showCurrentPageReport]="true"   
          [filterDelay]="0" [globalFilterFields]="['name']">

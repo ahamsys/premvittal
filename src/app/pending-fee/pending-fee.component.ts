@@ -10,21 +10,31 @@ import { PendingFees } from '../models/pendingfees';
 export class PendingFeeComponent implements OnInit {
   year : string = "2022-23";
   students : PendingFees[] = [];
+  monthFee: Date;
 
   constructor(private route : Router,
               private studentService : StudentService) { }
 
   ngOnInit(): void {
-    this._getData()
+//    this._getData()
   }
 
   _getData() {
-    this.studentService.getPendingFee(this.year).subscribe( response=> {
+    const month = { 
+      year: this.year,
+      month: this.monthFee
+    }
+    
+    this.studentService.getPendingFee(month).subscribe( response=> {
       this.students = response;
       console.log(this.students);
     })
   }
 
+  monthSelect() {
+    console.log("Month Selected "+ this.monthFee)
+    this._getData();
+  }
   onCancel() {
     this.route.navigateByUrl( '' );
   }
