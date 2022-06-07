@@ -16,7 +16,8 @@ export class PendingFeeComponent implements OnInit {
               private studentService : StudentService) { }
 
   ngOnInit(): void {
-//    this._getData()
+    this.monthFee=new Date()
+    this._getData()
   }
 
   _getData() {
@@ -24,15 +25,16 @@ export class PendingFeeComponent implements OnInit {
       year: this.year,
       month: this.monthFee
     }
-    
+    console.log("=>Year  "+month.year)
+    console.log("=>Month "+month.month)
     this.studentService.getPendingFee(month).subscribe( response=> {
       this.students = response;
-      console.log(this.students);
+//      console.log(this.students);
     })
   }
 
   monthSelect() {
-    console.log("Month Selected "+ this.monthFee)
+    console.log("Sir Month Selected "+ this.monthFee)
     this._getData();
   }
   onCancel() {

@@ -22,7 +22,9 @@ export class EditStudentComponent implements OnInit {
   isEditStudent : boolean = false;
   isRemarkStudent  : boolean = false;
   isRemarkSaved : boolean = false;
+  isviewStudent : boolean = false;
   remarks : Remarks[] = [];
+  age : String = "Age";
 
   constructor(private activatedRoute : ActivatedRoute,
               private studentService : StudentService,
@@ -33,6 +35,7 @@ export class EditStudentComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this._getStudent();
+
     this._getRemarks();
 
     this.form = this.fb.group({
@@ -78,8 +81,29 @@ export class EditStudentComponent implements OnInit {
       this.studentForm.address2.setValue( response.address2 );
       let ti:Date = new Date(response.dob);
       this.studentForm.dob.setValue( ti );
+      this.isviewStudent = true;
     })
   }
+
+  _getAge()
+  {
+    console.log("getAge() executed")
+    if ( this.isviewStudent){ 
+      console.log("Age setting "+this.viewStudent.dob)
+      const ti =  new Date(this.viewStudent.dob); 
+
+      console.log("get age for dob: "+ti)
+      const mm = ti.getMonth()+1;
+      const dd = ti.getDate();
+      const yy = ti.getFullYear();
+      const dob = mm+'-'+dd+'-'+yy;
+      console.log("get age for dob: ["+dob+"]")
+      this.studentService.getAgeForStudent(dob).subscribe( response=> {
+        this.age = response.dob;
+        console.log("age "+response.dob)
+      })
+   }
+ }
 
   onSave() {
     this.isStudentSaved = true;

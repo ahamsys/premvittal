@@ -7,10 +7,10 @@
 </p-toolbar>  
 <br/>
 <div class="card" *ngIf="monthFee">
-<p-table [value]="students" #dt responsiveLayout="scroll"
+<p-table [value]="students" #dt responsiveLayout="scroll" sortField="name" 
          [paginator]="true"         [rows]="5"  [showCurrentPageReport]="true"   
          [filterDelay]="0" [globalFilterFields]="['name']">
-         >
+         
          <ng-template pTemplate="caption">
             <div class="table-header">
                 Pending Fee List 

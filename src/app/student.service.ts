@@ -47,13 +47,22 @@ export class StudentService {
     return this.http.get<Fees[]>(`${this.apiFeeURL}/${studentid}`);
   }
 
+  getAgeForStudent(dob: String): Observable<any> {
+    return this.http.get<any>(`${this.apiURL}/age/${dob}`);
+  }
+
   getPendingFee(data: any): Observable<PendingFees[]> {
     let queryParams = new HttpParams();
-    queryParams = queryParams.append("year", data.year)
-    queryParams = queryParams.append("month", data.month)
+    const month = (data.month.getMonth()+1)+'-'+data.month.getDate()+'-'+data.month.getFullYear();
 
-    return this.http.get<PendingFees[]>(`${this.apiFeeURL}/pending/${data.year}`);
-    //, {params:queryParams});
+    console.log("Year=> ["+data.year+"]")
+    queryParams = queryParams.append("year", data.year)
+    queryParams = queryParams.append("month", month)
+
+    console.log("Query params: "+queryParams);
+//    return this.http.get<PendingFees[]>(`${this.apiFeeURL}/pending/${data.year}`);//Working
+    return this.http.get<PendingFees[]>(`${this.apiFeeURL}/pending/${data.year}`, 
+                                        {params:queryParams});
   }
 
     //Insert new record for student
